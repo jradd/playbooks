@@ -1,0 +1,31 @@
+---
+## Install oh-my-zsh
+
+- name: Clone oh-my-zsh repo
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ user }}/.oh-my-zsh
+
+- name: create dotfiles directory in home
+  file: path=/home/{{ user }}/.dotfiles/ state=directory owner={{ user }}
+
+- name: deploy .zshrc
+  template: src=templates/zshrc.j2 dest=/home/{{ user }}/.dotfiles/zshrc owner={{ user }}
+  template: src=templates/zshrc.local.j2 dest=/home/{{ user }}/.dotfiles/zshrc.local owner={{ user }}
+
+- name: backup existing zshrc
+  action: shell if [ -f ~/.zshrc ]; then mv ~/.zshrc{,.orig}; fi
+
+- name: symlink zshrc
+  file: path=/home/{{ user }}/.zshrc src=/home/{{ user }}/.dotfiles/zshrc state=link owner={{ user }}
+  file: path=/home/{{ user }}/.zshrc.local src=/home/{{ user }}/.dotfiles/zshrc.local state=link owner={{ user }}
+
+- name: set zsh as default shell
+  user: name={{ user }} shell=/bin/zsh
+
+- name: deploy .tmux.conf
+  template: src=templates/tmux.j2 dest=/home/{{ user }}/.dotfiles/tmux.conf owner={{ user }}
+
+- name: symlink tmux.conf
+  file: path=/home/{{ user }}/.tmux.conf src=/home/{{ user }}/.dotfiles/tmux.conf state=link owner={{ user }}
+
+- name: install spf13-vim, the ultimate Vim distribution (http://vim.spf13.com)
+  action: shell curl http://j.mp/spf13-vim3 -L -o - | sh

@@ -1,0 +1,3 @@
+chdir: /srv/www/djbase/djbase
+home: /srv/www/djbase/venv
+module: djbase.wsgi

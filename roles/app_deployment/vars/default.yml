@@ -1,0 +1,4 @@
+app_base_dir: /srv/www/djbase/djbase
+app_packages_dir: /srv/www/django/djbase/packages
+app_current_location: /srv/www/django/djbase/current
+app_version: default

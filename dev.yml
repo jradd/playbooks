@@ -1,0 +1,10 @@
+---
+- name: Install development environment python
+  hosts: web
+  user: root
+  remote_user: vagrant
+  sudo: yes
+
+  roles:
+    - common
+    - mydev

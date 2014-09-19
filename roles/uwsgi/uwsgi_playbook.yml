@@ -1,0 +1,18 @@
+# usage: ansible-playbook uwsgi_playbook.yml --extra-vars="user=ssh_user"
+# Variables:
+  # - module: djbase.wsgi
+  # - chdir: /srv/www/django/djbase/djbase
+  # - home: /srv/www/djbase/venv
+
+
+---
+- hosts: web
+  sudo: yes
+  vars_files:
+    - vars/default.yml
+    - [env_specific.yml, vars/default.yml]
+  user: ${user}
+  tasks:
+    - include: tasks/uwsgi.yml
+  handlers:
+      - include: handlers/uwsgi.yml

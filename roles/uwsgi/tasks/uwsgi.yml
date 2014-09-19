@@ -1,0 +1,12 @@
+- name: ensure uwsgi is at the desired version
+  apt: pkg=uwsgi state=latest
+- name: ensure python uwsgi plugin is installed
+  apt: pkg=uwsgi-plugin-python
+- name: ensure uwsgi runs with the latest configuration file
+  template: src=djbase.ini dest=/etc/uwsgi/apps-available/djbase.ini
+  notify:
+    - restart uwsgi
+- name: enable djbase app
+  file: src=/etc/uwsgi/apps-available/djbase.ini dest=/etc/uwsgi/apps-enabled/djbase.ini state=link
+  notify:
+    - restart uwsgi

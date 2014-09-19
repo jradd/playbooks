@@ -1,0 +1,5 @@
+#
+django_static_dir: /srv/www/djbase/djbase/static_resources
+server_name: .boothologie.net
+listen: 8080
+media_root: /srv/www/media

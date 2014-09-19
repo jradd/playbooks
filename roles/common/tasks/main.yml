@@ -1,0 +1,12 @@
+---
+
+- include: main_centos.yml
+  when: ansible_distribution == "CentOS"
+
+- include: main_ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Push global vimrc
+  template:
+    src=vimrc.j2
+    dest=/home/{{ ansible_ssh_user }}/.vimrc

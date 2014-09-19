@@ -1,0 +1,4 @@
+- name: remove symlink
+  file: path=${app_current_location} state=absent
+- name: update symlink
+  file: src="${app_packages_dir}/${app_version}" dest=${app_current_location} state=link

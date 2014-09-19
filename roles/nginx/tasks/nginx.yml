@@ -1,0 +1,9 @@
+- name: ensure Nginx is at the desired version
+  apt: pkg=nginx state=latest
+- name: ensure main Nginx configuration file is up to date
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+- name: ensure Nginx does not have a default configuration
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: restart nginx
+
