@@ -30,12 +30,11 @@
   - python-software-properties      # Dependencies for the apt module
   - software-properties-common
   - python-pycurl
-  - vim 
   - vim-common
   - tmux
   - zsh
   - git
-
-- name: Set vim as default editor (Ubuntu)
-  command: update-alternatives --set editor /usr/bin/vim.tiny
+#
+#- name: Set vim as default editor (Ubuntu)
+#  command: update-alternatives --set editor /usr/bin/vim
 
